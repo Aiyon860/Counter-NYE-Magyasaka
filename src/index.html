@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magyasaka - Tahun Baru</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../assets/favicon/site.webmanifest">
+    <link rel="mask-icon" href="../assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <!-- jsDelivr  -->
+    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: black;
+            overflow: hidden;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        .container{
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+
+        .faklah {
+            width: 100%;
+            color: white;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        h1 {
+            width: auto;
+            font-size: 2rem;
+            display: inline;
+            font-family: 'Single Day', cursive;
+        }
+        
+        .typed-cursor {
+            font-size: 2rem;
+            animation: 0.75s blink step-end infinite;
+        }
+
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 4rem;
+            }
+
+            .typed-cursor {
+                font-size: 4rem;
+            }
+        }
+
+
+        @keyframes blink {
+            from, to {
+                color: transparent;
+            }
+            50% {
+                color: white;
+            }
+        }
+        
+        video {
+            position: fixed;
+            object-fit: cover;
+            right: 0;
+            bottom: 0;
+            min-height: 100%;
+            min-width: 100%;
+            
+        }
+    </style>
+</head>
+    <body>
+        <video autoplay muted loop playsinline
+            src="../assets/video/night_sky.mp4">
+        </video>
+        <div class="container">
+            <div class="faklah">
+                <h1 id="counter"></h1>
+            </div>
+        </div>
+    </body>
+    <script>
+        // ini scrip mercon
+        const container = document.querySelector('.container')
+        const fireworks = new Fireworks.default(container, {
+            autoresize: true,
+            opacity: 0.5,
+            acceleration: 1.05,
+            friction: 0.97,
+            gravity: 1.5,
+            particles: 50,
+            traceLength: 3,
+            traceSpeed: 10,
+            explosion: 10,
+            intensity: 30,
+            flickering: 50,
+            lineStyle: 'round',
+            hue: {
+                min: 0,
+                max: 360
+            },
+            delay: {
+                min: 20,
+                max: 60
+            },
+            rocketsPoint: {
+                min: 50,
+                max: 50
+            },
+            lineWidth: {
+                explosion: {
+                min: 1,
+                max: 3
+                },
+                trace: {
+                min: 1,
+                max: 2
+                }
+            },
+            brightness: {
+                min: 60,
+                max: 90
+            },
+            decay: {
+                min: 0.015,
+                max: 0.03
+            },
+            mouse: {
+                click: true,
+                move: false,
+                max: 1
+            },
+            sound: {
+                enabled: true,
+                files: [
+                    '../assets/music/1.wav',
+                    '../assets/music/2.wav',
+                    '../assets/music/3.wav'
+                ],
+                volume: { min: 20, max: 30 },
+            }
+        })
+        
+
+        // counter
+        // Set the date we're counting down to
+        var countDownDate = new Date("Jan 1, 2024 00:00:00").getTime();
+        var audio = new Audio('../assets/music/clock.mp3');
+        audio.play();
+        audio.loop = true;
+        // Update the count down every 1 second
+        var x = setInterval(function() {
+            // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the element with id="demo"
+            document.getElementById("counter").innerHTML = days + ":" + hours + ":"
+            + minutes + ":" + seconds;
+
+            // var audio = new Audio('../assets/music/waiting.wav');
+            // audio.play();   
+
+            // If the count down is finished, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("counter").innerHTML = '';
+                var typed = new Typed('#counter', {
+                    strings: ['SELAMAT TAHUN BARU! &#127881; <br> SIAP SIAP UAS &#129402;'],
+                    stringsElement: null,
+                    typeSpeed: 50,
+                    backDelay: 1500,
+                    loop: true,
+                    backSpeed: 50,
+                    showCursor: true,
+                    autoInsertCss: true,
+                });
+                fireworks.start();
+                audio.pause();
+            }
+        }, 1000);
+    </script>
+</html>
