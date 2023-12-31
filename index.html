@@ -17,6 +17,8 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap');
 
         * {
             padding: 0;
@@ -27,7 +29,6 @@
         body {
             background: black;
             overflow: hidden;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
         }
 
         .container{
@@ -46,36 +47,11 @@
             text-align: center;
         }
 
-        h1 {
+        /* h2 before time ends */
+        h2#counterBefore {
             width: auto;
-            font-size: 2rem;
-            display: inline;
+            font-size: 4rem;
             font-family: 'Single Day', cursive;
-        }
-        
-        .typed-cursor {
-            font-size: 2rem;
-            animation: 0.75s blink step-end infinite;
-        }
-
-        @media (min-width: 768px) {
-            h1 {
-                font-size: 4rem;
-            }
-
-            .typed-cursor {
-                font-size: 4rem;
-            }
-        }
-
-
-        @keyframes blink {
-            from, to {
-                color: transparent;
-            }
-            50% {
-                color: white;
-            }
         }
         
         video {
@@ -87,6 +63,68 @@
             min-width: 100%;
             
         }
+
+        /* after counter ends */
+        img#magyasaka { max-width: 125px; }
+
+        h1#headerCounter {
+            font-size: 3.5rem;
+            font-family: 'Montserrat', sans-serif;
+            margin-block: 1rem;
+        }
+
+        /* h2 after counter ends */
+        h2#counterAfter {
+            font-size: 2.75rem;
+            font-family: 'Single Day', cursive;
+        }
+
+        h3#copyright {
+            font-family: 'Lato', sans-serif;
+            letter-spacing: 7.5px;
+            margin-top: 4rem;
+        }
+
+        /* responsive alamak */
+        @media only screen and (max-width: 769px) {
+            img#magyasaka { max-width: 100px; }
+            h1#headerCounter { font-size: 2.75rem; }
+            h2#counterAfter { font-size: 2rem; }
+            h3#copyright { 
+                font-size: 1rem; 
+                margin-top: 3.75rem;
+            }
+        }
+
+        @media only screen and (max-width: 426px) {
+            img#magyasaka { max-width: 75px; }
+            h1#headerCounter { font-size: 1.5rem; }
+            h2#counterAfter { font-size: 1.25rem; }
+            h3#copyright { 
+                font-size: 0.75rem; 
+                margin-top: 3.25rem;
+            }
+        }
+
+        @media only screen and (max-width: 376px) {
+            img#magyasaka { max-width: 65px; }
+            h1#headerCounter { font-size: 1.35rem; }
+            h2#counterAfter { font-size: 1.15rem; }
+            h3#copyright { 
+                font-size: 0.65rem; 
+                margin-top: 3rem;
+            }
+        }
+
+        @media only screen and (max-width: 321px) {
+            img#magyasaka { max-width: 50px; }
+            h1#headerCounter { font-size: 1.25rem; }
+            h2#counterAfter { font-size: 1rem; }
+            h3#copyright { 
+                font-size: 0.6rem; 
+                margin-top: 2.75rem;
+            }
+        }
     </style>
 </head>
     <body>
@@ -94,8 +132,8 @@
             src="assets/video/night_sky.mp4">
         </video>
         <div class="container">
-            <div class="faklah">
-                <h1 id="counter"></h1>
+            <div class="faklah" id="faklah">
+                <h2 id="counterBefore"></h2>
             </div>
         </div>
     </body>
@@ -164,10 +202,9 @@
 
         // counter
         // Set the date we're counting down to
-        var countDownDate = new Date("Jan 1, 2024 00:00:00").getTime();
+        var countDownDate = new Date("Dec 31, 2023 16:41:30").getTime();
         var audio = new Audio('assets/music/clock.mp3');
         audio.play();
-        audio.loop = true;
         // Update the count down every 1 second
         var x = setInterval(function() {
             // Get today's date and time
@@ -183,25 +220,30 @@
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
             // Display the result in the element with id="demo"
-            document.getElementById("counter").innerHTML = days + ":" + hours + ":"
+            document.getElementById("counterBefore").innerHTML = days + ":" + hours + ":"
             + minutes + ":" + seconds;
 
             // If the count down is finished, write some text
             if (distance < 0) {
                 clearInterval(x);
-                document.getElementById("counter").innerHTML = '';
-                var typed = new Typed('#counter', {
-                    strings: ['SELAMAT TAHUN BARU! &#127881; <br> SIAP SIAP UAS &#129402;'],
-                    stringsElement: null,
-                    typeSpeed: 50,
-                    backDelay: 1500,
-                    loop: true,
-                    backSpeed: 50,
-                    showCursor: true,
-                    autoInsertCss: true,
-                });
-                fireworks.start();
                 audio.pause();
+                fireworks.start();
+
+                const faklah = document.getElementById('faklah');
+                const magyasaka = document.createElement('div');
+                const headerCounter = document.createElement('div');
+                const counterBefore = document.getElementById('counterBefore');
+                const copyright = document.createElement('div');
+
+                magyasaka.innerHTML = '<img src="assets/img/magyasaka.png" id="magyasaka"></img>';
+                headerCounter.innerHTML = '<h1 id="headerCounter">SELAMAT TAHUN BARU !!</h1>';
+                counterBefore.innerHTML = '<h2 id="counterAfter">SEMANGAT YA GOODLUCK UAS &#129782;&#127995;</h2>';
+                copyright.innerHTML = '<h3 id="copyright">- MAGYASAKA -</h3>';
+                
+                faklah.insertBefore(magyasaka, faklah.children[0]);
+                faklah.insertBefore(headerCounter, faklah.children[1]);
+                faklah.appendChild(copyright);
+
             }
         }, 1000);
     </script>
